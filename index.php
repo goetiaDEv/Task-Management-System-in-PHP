@@ -75,3 +75,23 @@ function excluirTarefa($id) {
 $tarefas = buscarTarefas();
 
 ?>
+
+<?php
+
+require_once 'TarefasController.php';
+
+// Criar instância do TarefaDAO e do TarefasController
+$tarefaDAO = new TarefaDAOImpl($conexao);
+$tarefasController = new TarefasController($tarefaDAO);
+
+// Definir rotas para as ações da API
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if ($_GET['acao'] === 'buscarTodasTarefas') {
+        $tarefasController->buscarTodasTarefas();
+    }
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['acao'] === 'salvarTarefa') {
+        $nome = $_POST['nome'];
+        $descricao = $_POST['descricao'];
+
+        
