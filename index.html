@@ -31,3 +31,18 @@
             <?php foreach ($tarefas as $tarefa): ?>
                 <tr>
                     <td><?php echo $tarefa['id'];
+
+
+                                            <td><?php echo $tarefa['nome']; ?></td>
+                    <td><?php echo $tarefa['descricao']; ?></td>
+                    <td>
+                        <a href="acoes.php?acao=editar&id=<?php echo $tarefa['id']; ?>">Editar</a>
+                        <a href="acoes.php?acao=excluir&id=<?php echo $tarefa['id']; ?>">Excluir</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</body>
+</html>
+
