@@ -1,0 +1,8 @@
+CREATE DATABASE tarefas;
+CREATE TABLE tarefas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_conclusao DATETIME NULL
+);
