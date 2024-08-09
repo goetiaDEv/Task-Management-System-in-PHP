@@ -95,3 +95,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $descricao = $_POST['descricao'];
 
         
+// app/Models/Evento.php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Evento extends Model
+{
+    protected $fillable = ['titulo', 'descricao', 'data_inicio', 'data_fim'];
+}
+
+    // routes/api.php
+<?php
+
+use App\Http\Controllers\EventoController;
+use Illuminate\Http\Request;
+
+Route::get('/eventos', [EventoController::class, 'index']);
+Route::post('/eventos', [EventoController::class, 'store']);
+Route::get('/eventos/{id}', [EventoController::class, 'show']);
+Route::put('/eventos/{id}', [EventoController::class, 'update']);
+Route::delete('/eventos/{id}', [EventoController::class, 'destroy']);
+
+    // app/Http/Controllers/EventoController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Evento;
+use Illuminate\Http\Request;
+
+class EventoController extends Controller
+{
+    public function index()
+    {
+        return Evento::all();
+    }
+
+    public function store(Request $request)
+    {
+        $evento = Evento::create($request->all());
+        return response()->json($evento, 201);
+    }
+
+    public function show(Evento $evento)
+    {
+        return $evento;
+    }
+
+    public function update(Request $request, Evento $evento)
+    {
+        $evento->update($request->all());
+        return response()->json($evento, 200);
+    }
+
+    public function destroy(Evento $evento)
+    {
+        $evento->delete();
+        return response()->json(null, 204);
+    }
+}
